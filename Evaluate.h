@@ -20,6 +20,6 @@ float get_F1_score(string test_fold);
 
 bool TLBO_test(Mat &img, Mat &mask, float threshold);
 
-Mat NMS(Mat &img_tmp);
+Mat NMS(Mat &img_tmp, int window_width);
 
 #endif//EVALUATE_H

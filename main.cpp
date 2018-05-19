@@ -1,7 +1,6 @@
 ﻿#include "ExtractData.h"
 #include "ReadData.h"
 #include "Node.h"
-#include "Data.h"
 #include "RandomForest.h"
 #include "Evaluate.h"
 #include "TLBO.h"
@@ -108,7 +107,6 @@ int main(){
 
 		cout << "*****************Start to read training data*****************" << endl;
 		vector<Mat> imgTrain;
-		//vector<Mat> integral_img_list;
 		vector<int> labelTrain;
 		int pos_num = 0;
 		int neg_num = 0;
@@ -148,11 +146,9 @@ int main(){
 			for(int k=0; k<256; k++)
 				fin_mask >> mask_result.at<float>(0,k);
 
-			cout << mask_threshold << endl;
-			cout << mask_result << endl;
+			//cout << mask_threshold << endl;
+			//cout << mask_result << endl;
 		}
-
-		cin.get();
 
 		double start,end;
 
@@ -160,11 +156,11 @@ int main(){
 		for(int i=0; i<imgTrain.size(); i++)
 			integral(imgTrain[i],imgTrain[i]);
 
-		for(float i=1; i<=30; i+=2){
+		for(float i=1; i<=1; i+=2){
 			int window_width = 1;
 
 			//int tree_num = 3;
-			int tree_num = i;
+			int tree_num = 20;
 			int sample_num = 10000;
 			int maxDepth = 50;
 			int minLeafSample = 10;
@@ -204,7 +200,7 @@ int main(){
 			float F1_score = get_F1_score(test_fold);
 			cout << "*****************Calculation completed*****************" << endl << endl;
 
-			ofstream fin("E:/45 Thesis/result/result.csv",ios::app);
+			/*ofstream fin("E:/45 Thesis/result/result.csv",ios::app);
 			if(!fin){
 				cout << "open file error" <<endl; 
 				cin.get();
@@ -212,7 +208,7 @@ int main(){
 			}
 
 			fin <<",tree num," <<  tree_num << ",sumple num," << sample_num << ",maxDepth," << maxDepth << ",minLeafSample," << minLeafSample << ",minInfo," << minInfo <<",train time," << train_t << ",test time," << test_t <<",window width," << window_width << endl;;
-			fin.close();
+			fin.close();*/
 
 			delete RF;
 			RF = NULL;
